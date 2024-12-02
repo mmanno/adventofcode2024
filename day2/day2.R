@@ -26,29 +26,20 @@ computediff <- function(mylist){
 
 checkupordown <- function(mylist){
   list_length <- length(mylist)
-  if(sum(mylist > 0) == list_length || sum(mylist < 0) == list_length){
-    return(TRUE)
-  }
-  return(FALSE)
+  sum(mylist > 0) == list_length || sum(mylist < 0) == list_length
 }
 
 checkdiffer <- function(mylist){
   list_length <- length(mylist)
-  if(sum(abs(mylist) >= 1) == list_length && sum(abs(mylist) <= 3) == list_length){
-    return(TRUE)
-  }
-  return(FALSE)
+  sum(abs(mylist) >= 1) == list_length && sum(abs(mylist) <= 3) == list_length
 }
 
 checksafe <- function(mylist){
   diffoflist <- computediff(mylist)
-  if(sum(checkupordown(diffoflist),checkdiffer(diffoflist)) == 2){
-    return(TRUE)
-  }
-  return(FALSE)
+  sum(checkupordown(diffoflist),checkdiffer(diffoflist)) == 2
 }
 
-sum(lapply(myinput, function(x) checksafe(x)) == TRUE)
+print(paste0("Part 1 : ",sum(lapply(myinput, function(x) checksafe(x)) == TRUE)))
   
 
 ########
@@ -63,4 +54,4 @@ checkeachitem <- function(mylist){
   return(FALSE)
 }
 
-sum(lapply(myinput, function(x) checkeachitem(x)) == TRUE)
+print(paste0("Part 2 : ",sum(lapply(myinput, function(x) checkeachitem(x)) == TRUE)))
