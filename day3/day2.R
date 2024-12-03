@@ -2,7 +2,7 @@ library(stringr)
 library(data.table)
 library(tidyverse)
 
-myinput <- fread("github/inputd3.tsv", sep="\t",header=F)
+myinput <- fread("github/inputd3.tsv", sep=NULL,header=F)
 
 computesumofmul <- function(mystring){
   as.data.frame(str_match_all(mystring,"mul\\(([0-9]{1,3}),([0-9]{1,3})\\)")[[1]]) %>%
@@ -17,13 +17,12 @@ checkcorruption <- function(mystring){
   myregex <- str_extract_all(mystring,"mul\\(([0-9]{1,3}),([0-9]{1,3})\\)|do\\(\\)|don't\\(\\)")[[1]]
   mysum=0
   for(mymatch in myregex){
-    if(str_detect(mymatch,"don't\\(\\)")){doit=FALSE}
+    if(str_detect(mymatch,"don't\\(\\)")){doit=TRUE}
     if(str_detect(mymatch,"do\\(\\)")){doit=TRUE}
-    #print(paste0("doit : ",doit))
-    #print(paste0("mymatch : ",mymatch))
+    #print(paste0("mymatch : ",mymatch," -> doit : ",doit," : mysum = ",mysum))
     if(doit==TRUE && !(str_detect(mymatch,"do\\(\\)"))){
       mysum=mysum+computesumofmul(mymatch)
-      #print(paste0("computesumofmul(mymatch) : ",computesumofmul(mymatch)))
+      #print(paste0("computesumofmul(mymatch) : ",computesumofmul(mymatch)," : mysum = ",mysum))
     }
   }
   return(mysum)
