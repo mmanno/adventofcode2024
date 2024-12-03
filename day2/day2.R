@@ -12,7 +12,7 @@ library(data.table)
 
 ########
 # input 
-myinput <- data.table::fread(file = "day2/input.txt", sep = ",", header = F)
+myinput <- data.table::fread(file = "data/inputday2.tsv", sep = ",", header = F)
 myinput <- apply(myinput,1, function(x) as.numeric(strsplit(x," ")[[1]]))
 
 ########

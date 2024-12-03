@@ -14,7 +14,7 @@ library(data.table)
 
 ########
 # input 
-myinput <- data.table::fread(file = "day1/input.tsv", sep = " ", header = F, col.names = c("RL","LL"))
+myinput <- data.table::fread(file = "data/inputday1.tsv", sep = " ", header = F, col.names = c("RL","LL"))
 
 ########
 # Code part one
